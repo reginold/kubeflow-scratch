@@ -2,6 +2,7 @@
   - [Create the basic kubeflow based on AWS EKS.](#create-the-basic-kubeflow-based-on-aws-eks)
     - [Create an EKS cluster and install Kubeflow](#create-an-eks-cluster-and-install-kubeflow)
     - [Access Kubeflow central dashboard](#access-kubeflow-central-dashboard)
+    - [Create a container registry](#create-a-container-registry)
 # kubeflow-scratch
 ## Create the basic kubeflow based on AWS EKS.
 
@@ -54,4 +55,21 @@ In this guide, we will go through every step that is necessary to have a functio
   - ```kubectl get ingress -n istio-system```
     - return an address like
       - ```123-istiosystem-istio-2af2-4567.ap-northeast-1.elb.amazonaws.com```
+
+### Create a container registry
+- Install docker on aws
+- get-login-password (AWS CLI)
+  - `aws ecr get-login-password --region ${region} | docker login --username AWS --password-stdin ${aws_account_id}.dkr.ecr.${region}.amazonaws.com`
+- Create a repository
+  - `aws ecr create-repository \
+    --repository-name kubeflow-demo \
+    --image-scanning-configuration scanOnPush=true \
+    --region region`
+- Create a container
+  - `docker build -t kubeflow-image .`
+- Tage the image
+  - `docker tag kubeflow-demo:latest ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/kubeflow-demo:latest`
+- Push the image
+  - `docker push ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/kubeflow-demo:latest`
+
 
