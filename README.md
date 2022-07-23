@@ -68,8 +68,17 @@ In this guide, we will go through every step that is necessary to have a functio
 - Create a container
   - `docker build -t kubeflow-image .`
 - Tage the image
-  - `docker tag kubeflow-demo:latest ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/kubeflow-demo:latest`
-- Push the image
   - `docker push ${aws_account_id}.dkr.ecr.${region}.amazonaws.com/kubeflow-demo:latest`
+### Create the S3 bucket
+- Test if you have access to S3
+```.py
+import boto3
 
+conn = boto3.client('s3')
+contents = conn.list_objects(Bucket=bucket_name)['Contents']
+for f in contents:
+    print(f['Key'])
+```
+### Create the Kubeflow pipeline
+- refer to the `kubeflow_pipiline.py`
 
