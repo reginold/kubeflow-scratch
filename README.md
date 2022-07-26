@@ -1,8 +1,11 @@
+# Introduction
 - [kubeflow-scratch](#kubeflow-scratch)
   - [Create the basic kubeflow based on AWS EKS.](#create-the-basic-kubeflow-based-on-aws-eks)
     - [Create an EKS cluster and install Kubeflow](#create-an-eks-cluster-and-install-kubeflow)
     - [Access Kubeflow central dashboard](#access-kubeflow-central-dashboard)
     - [Create a container registry](#create-a-container-registry)
+    - [Create the S3 bucket](#create-the-s3-bucket)
+    - [Create the Kubeflow pipeline](#create-the-kubeflow-pipeline)
 # kubeflow-scratch
 ## Create the basic kubeflow based on AWS EKS.
 
@@ -80,5 +83,5 @@ for f in contents:
     print(f['Key'])
 ```
 ### Create the Kubeflow pipeline
-- refer to the `kubeflow_pipiline.py`
+- Refer to the `kubeflow_pipiline.py`
 
